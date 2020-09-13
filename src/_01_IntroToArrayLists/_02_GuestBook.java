@@ -2,9 +2,11 @@ package _01_IntroToArrayLists;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class _02_GuestBook implements ActionListener {
@@ -28,6 +30,7 @@ public class _02_GuestBook implements ActionListener {
 	JPanel panel = new JPanel();
 	JButton addButton = new JButton("Add Names");
 	JButton viewButton = new JButton("View Names");
+	ArrayList<String> names = new ArrayList<String>();
 
 	void run() {
 		frame.add(panel);
@@ -36,14 +39,23 @@ public class _02_GuestBook implements ActionListener {
 		frame.setVisible(true);
 		addButton.addActionListener(this);
 		viewButton.addActionListener(this);
-	//ArrayList<Strings>names=new ArrayList();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.pack();
+
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-	if(e.equals(addButton)){
-	//	String
-	}
+		if (e.getSource() == (addButton)) {
+			String userAnswer = JOptionPane.showInputDialog("Enter a name.");
+			names.add(userAnswer);
+		} else if (e.getSource() == (viewButton)) {
+			String formattedList = "";
+			for (int i = 0; i < names.size(); i++) {
+				formattedList = formattedList + "Guest #" + (i+1)+ ": " + names.get(i)+"\n";
+			}
+	JOptionPane.showMessageDialog(null, formattedList);
+		}
 
 	}
 }
