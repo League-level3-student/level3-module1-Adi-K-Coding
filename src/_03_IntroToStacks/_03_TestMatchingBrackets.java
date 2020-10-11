@@ -22,7 +22,11 @@ public class _03_TestMatchingBrackets {
 	private boolean doBracketsMatch(String brackets) {
 		
 		//1. Use a for loop to iterate through your brackets String 
-
+for (int i = 0; i < brackets.length(); i++) {
+	//if(brackets.charAt(0).equals("{")) {
+		
+	}
+//}
     			//2.  If the current character is an '{'
 
         			//3.  Push an '{' onto the stack 
