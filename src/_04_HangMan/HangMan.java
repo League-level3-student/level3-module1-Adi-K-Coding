@@ -38,6 +38,7 @@ public class HangMan implements KeyListener {
 	}
 
 	void start() {
+		lives = 10;
 		userAnswer = JOptionPane.showInputDialog("How many words would you like to guess?");
 		int userAnswerNumber = Integer.parseInt(userAnswer);
 		for (int i = 0; i < userAnswerNumber; i++) {
@@ -46,6 +47,10 @@ public class HangMan implements KeyListener {
 				words.push(word);
 			}
 		}
+		start2();
+	}
+
+	void start2() {
 		currentWord = words.pop();
 		String underScores = "";
 		for (int i = 0; i < currentWord.length(); i++) {
@@ -62,20 +67,39 @@ public class HangMan implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		boolean correctGuess = false;
 		char letter = e.getKeyChar();
 		for (int i = 0; i < currentWord.length(); i++) {
 			if (currentWord.charAt(i) == letter) {
 				String text = label.getText();
 				String modifiedText = text.substring(0, i * 2) + letter + text.substring(i * 2 + 1);
 				label.setText(modifiedText);
+				correctGuess = true;
 				frame.pack();
-			//if(boolean)
-			
-				//lives = lives - 1;
-				//make boolean before the for loop to keep track of whether there was a correct match between what the 
-				//user typed and the word they are trying to guess
-			}	
+
+			}
 		}
+		if (correctGuess == false) {
+			lives = lives - 1;
+			System.out.println(lives);
+			if (lives <= 0) {
+				int playAgain = JOptionPane.showConfirmDialog(null,
+						"Game Over, the word was " + currentWord + "\nDo you want to play again?");
+				if (playAgain == 0) {
+					start();
+				} else {
+					System.exit(0);
+				}
+			}
+		}
+		if (!label.getText().contains("_") && !words.isEmpty()) {
+			start2();
+			lives = 10;
+
+		} else if (!label.getText().contains("_")) {
+			JOptionPane.showMessageDialog(null, "You won. Good Job. ");
+		}
+
 	}
 
 	@Override
