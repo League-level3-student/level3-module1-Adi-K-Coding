@@ -90,8 +90,3 @@ public class _02_LogSearch implements ActionListener {
 	}
 
 }
-
-// When this is complete, add a fourth button to your window. Button 4: Remove
-// Entry When this button is clicked, prompt the user to enter an ID using an
-// input dialog. If this ID exists in the HashMap, remove it. Otherwise, notify
-// the user that the ID is not in the list.
